@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Request
 
+from service.url_handle import shorten_url_service
 from schemas.base_schema import PostUrlShortenSchema
 
 router = APIRouter()
@@ -17,4 +18,5 @@ def redirect_request(shortened_url: str):
 
 @router.post("/shorten_url")
 def shorten_url(request: Request, data: PostUrlShortenSchema):
-    return {"message": "OK"}
+    res = shorten_url_service(original_url=data.url, valid_days=data.valid_days)
+    return {"url": res}

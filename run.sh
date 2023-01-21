@@ -1,4 +1,4 @@
-# sleep 10
+sleep 10 # wait for database startup (this logic is valid, while running app locally through docker-compose
 cd app
-# alembic upgrade heads
+alembic upgrade heads
 uvicorn main:app --host 0.0.0.0 --port 8000
