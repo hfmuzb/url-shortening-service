@@ -4,8 +4,14 @@ from starlette.responses import RedirectResponse
 from service.url_handle import shorten_url_service, get_original_url_service
 from schemas.base_schema import PostUrlShortenSchema
 from errors import UrlNotFoundError, UrlExpiredError, InvalidUrlError, InvalidDaysError
+from config import config
 
 router = APIRouter()
+
+
+@router.get("/")
+def root():
+    return {"msg": f"App is up and working. Please visit {config.ROOT_URL}/docs for more information. "}
 
 
 @router.get("/{shortened_url}")
