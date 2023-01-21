@@ -3,7 +3,7 @@ from starlette.responses import RedirectResponse
 
 from service.url_handle import shorten_url_service, get_original_url_service
 from schemas.base_schema import PostUrlShortenSchema
-from errors import UrlNotFoundError, UrlExpiredError, InvalidUrlError
+from errors import UrlNotFoundError, UrlExpiredError, InvalidUrlError, InvalidDaysError
 
 router = APIRouter()
 
@@ -25,4 +25,6 @@ def shorten_url(request: Request, response: Response, data: PostUrlShortenSchema
         res = shorten_url_service(original_url=data.url, valid_days=data.valid_days)
         return {"url": res}
     except InvalidUrlError as e:
+        raise HTTPException(status_code=e.code, detail=e.message)
+    except InvalidDaysError as e:
         raise HTTPException(status_code=e.code, detail=e.message)

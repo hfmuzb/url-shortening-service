@@ -1,12 +1,11 @@
 from typing import Optional
 import datetime
 import validators
-from urllib.parse import urlparse
 
 from functional.url_handle import generate_shortened_url
 from crud.data import url_is_unique, add_new_url, get_original_url_item
 from config import config
-from errors import UrlExpiredError, UrlNotFoundError, InvalidUrlError
+from errors import UrlExpiredError, UrlNotFoundError, InvalidUrlError, InvalidDaysError
 
 DEFAULT_DAYS_VALID = config.DEFAULT_DAYS_VALID
 ROOT_URL = config.ROOT_URL
@@ -15,6 +14,8 @@ ROOT_URL = config.ROOT_URL
 def shorten_url_service(original_url: str, valid_days: Optional[int] = None) -> str:
     if not validators.url(original_url):
         raise InvalidUrlError
+    if valid_days < 1 or valid_days > 365:
+        raise InvalidDaysError
     if valid_days is None:
         valid_days = DEFAULT_DAYS_VALID
     while True:

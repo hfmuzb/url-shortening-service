@@ -26,3 +26,13 @@ class InvalidUrlError(Exception):
     @property
     def message(self):
         return "Invalid url"
+
+
+class InvalidDaysError(Exception):
+    @property
+    def code(self):
+        return 400
+
+    @property
+    def message(self):
+        return "Insert value between 1 and 365"
