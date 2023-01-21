@@ -1,0 +1,25 @@
+version: '3.8'
+
+x-common-postgres-variables: &common-postgres-variables
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
+  POSTGRES_CONTAINER_NAME: pg_container
+  POSTGRES_PORT: 5432
+
+services:
+  app:
+    build: .
+    container_name: url_shorten_app_container
+    ports:
+      - "8000:8000"
+    environment: *common-postgres-variables
+    depends_on:
+        - db
+
+  db:
+    image: postgres:15.1
+    container_name: pg_container
+    restart: always
+    environment: *common-postgres-variables
+    ports:
+      - "8001:5432"
