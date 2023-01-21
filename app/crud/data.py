@@ -1,8 +1,10 @@
+from typing import Union
+
 from crud.db_setup import SessionLocal
 from models.data import Data
 
 
-def url_is_unique(shortened_url) -> bool:
+def url_is_unique(shortened_url: str) -> bool:
     with SessionLocal() as session:
         item = session.query(Data).filter(Data.shortened_url == shortened_url).first()
     if item:
@@ -21,3 +23,9 @@ def add_new_url(original_url, shortened_url, created_at, valid_days) -> None:
         session.add(item)
         session.commit()
     return
+
+
+def get_original_url_item(shortened_url: str) -> Union[Data, None]:
+    with SessionLocal() as session:
+        item = session.query(Data).filter(Data.shortened_url == shortened_url).first()
+    return item
