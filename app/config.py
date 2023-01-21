@@ -8,9 +8,9 @@ class Config:
     # Database configuration
     DB_STRING = 'postgresql://{username}:{password}@{container}:{port}/{db_name}'
     DB_USERNAME = os.getenv('POSTGRES_USER', 'postgres')
-    DB_PASSWORD = os.getenv('POSTGRES_PASSWORD', 'mysecretpassword')
-    DB_CONTAINER = os.getenv('POSTGRES_CONTAINER_NAME', 'localhost')
-    DB_PORT = os.getenv('POSTGRES_PORT', '8001')
+    DB_PASSWORD = os.getenv('POSTGRES_PASSWORD', 'postgres')
+    DB_CONTAINER = os.getenv('POSTGRES_CONTAINER_NAME', 'pg_container')
+    DB_PORT = os.getenv('POSTGRES_PORT', '5432')
     DB_NAME = os.getenv('DB_NAME', 'postgres')
 
     DB_STRING = DB_STRING.format(username=DB_USERNAME,
