@@ -14,10 +14,10 @@ ROOT_URL = config.ROOT_URL
 def shorten_url_service(original_url: str, valid_days: Optional[int] = None) -> str:
     if not validators.url(original_url):
         raise InvalidUrlError
-    if valid_days < 1 or valid_days > 365:
-        raise InvalidDaysError
     if valid_days is None:
         valid_days = DEFAULT_DAYS_VALID
+    if valid_days < 1 or valid_days > 365:
+        raise InvalidDaysError
     while True:
         shortened_url = generate_shortened_url()
         # check if generated short url is unique
