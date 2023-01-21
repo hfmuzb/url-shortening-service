@@ -18,5 +18,6 @@ def shorten_url_service(original_url: str, valid_days: Optional[int] = None):
         if url_is_unique(shortened_url):
             break
     # add db record
-    add_new_url(original_url=original_url, shortened_url=shortened_url, created_at=datetime.date, valid_days=valid_days)
+    add_new_url(original_url=original_url, shortened_url=shortened_url,
+                created_at=datetime.date.today(), valid_days=valid_days)
     return f"{ROOT_URL}/{shortened_url}"
