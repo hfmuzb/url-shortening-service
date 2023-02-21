@@ -31,7 +31,7 @@ def shorten_url_service(original_url: str, db: Session, valid_days: Optional[int
 
 
 def get_original_url_service(shortened_url: str, db: Session) -> str:
-    res = get_original_url_item(shortened_url=shortened_url)
+    res = get_original_url_item(shortened_url=shortened_url, db=db)
     if not res:
         raise UrlNotFoundError
     days_passed = datetime.date.today() - res.created_at

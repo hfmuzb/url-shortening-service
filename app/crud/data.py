@@ -1,7 +1,6 @@
 from typing import Union
 from sqlalchemy.orm import Session
 
-from crud.db_setup import SessionLocal
 from models.data import Data
 
 
